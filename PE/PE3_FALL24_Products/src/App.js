@@ -1,13 +1,18 @@
 import React from "react";
-import Navbar from "./Components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import ProductsList from "./pages/ProductsList";
+import ProductDetails from "./pages/ProductDetails";
 
 const App = () => {
     return (
         <>
-            <div className="App">
-                <Navbar />
-            </div>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<ProductsList />}></Route>
+                    <Route path="/product/:id" element={<ProductDetails />}></Route>
+                </Routes>
+            </BrowserRouter>
         </>
     );
 };
