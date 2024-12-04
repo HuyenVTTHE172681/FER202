@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Shin-chan Plush Toy",
+      "description": "A soft and cuddly Shin-chan plush toy for all ages.",
+      "images": ["image1.jpg", "image2.jpg"]
+    },
+    {
+      "id": 2,
+      "name": "Shin-chan Action Figure Set",
+      "description": "A collectible set of Shin-chan action figures, including all his friends.",
+      "images": ["image3.jpg", "image4.jpg"]
+    },
+    {
+      "id": 3,
+      "name": "Shin-chan Backpack",
+      "description": "A colorful Shin-chan backpack, perfect for school and outings.",
+      "images": ["image1.jpg", "image5.jpg"]
+    },
+    {
+      "id": 4,
+      "name": "Shin-chan Mug",
+      "description": "A Shin-chan themed mug to brighten up your morning coffee.",
+      "images": ["image4.jpg", "image5.jpg"]
+    },
+    {
+      "id": 5,
+      "name": "Shin-chan Sticker Pack",
+      "description": "A fun pack of Shin-chan stickers to decorate your notebooks, laptops, and more.",
+      "images": ["shin.png", "image2.jpg"]
+    },
+    {
+      "id": 6,
+      "name": "Shin-chan T-Shirt",
+      "description": "A stylish Shin-chan t-shirt with a playful design for fans of all ages.",
+      "images": ["image3.jpg", "image5.jpg"]
+    }
+  ]
+}

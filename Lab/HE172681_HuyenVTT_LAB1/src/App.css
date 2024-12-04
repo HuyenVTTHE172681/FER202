@@ -1,0 +1,20 @@
+#footer Col {
+  border: 1px solid grey;
+}
+
+.custom-dropdown {
+  background-color: white; /* White background */
+  border: 1px solid #ced4da; /* Match input border color */
+  padding: 0.375rem 0.75rem; /* Padding to match input fields */
+  border-radius: 0.25rem; /* Match input border radius */
+  color: #495057; /* Text color similar to inputs */
+  text-align: left; /* Left align text */
+  width: 100%;
+}
+
+.custom-dropdown:focus,
+.custom-dropdown:hover {
+  border-color: #80bdff; /* Border color on hover/focus */
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Match focus effect */
+}

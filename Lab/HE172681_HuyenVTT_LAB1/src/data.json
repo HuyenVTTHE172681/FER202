@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": 1,
+      "title": "Pizza 1",
+      "price": "$100",
+      "image": "menu1.jpg",
+      "isNew": true
+    },
+    {
+      "id": 2,
+      "title": "Pizza 2",
+      "price": "$120",
+      "image": "menu2.jpg",
+      "isDiscounted": true
+    },
+    {
+      "id": 3,
+      "title": "Pizza 3",
+      "price": "$110",
+      "image": "menu3.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Pizza 4",
+      "price": "$130",
+      "image": "menu4.jpg",
+      "isDiscounted": true,
+      "isNew": true
+    }
+  ],
+  "carousel": [
+    {
+      "id": 1,
+      "title": "Neapolitan Pizza",
+      "description": "If you are looking for a traditional Italian pizza, the Neapolitan is the best option.",
+      "image": "pizza1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Neapolitan Pizza",
+      "description": "If you are looking for a traditional Italian pizza, the Neapolitan is the best option.",
+      "image": "pizza2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Neapolitan Pizza",
+      "description": "If you are looking for a traditional Italian pizza, the Neapolitan is the best option.",
+      "image": "pizza3.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Neapolitan Pizza",
+      "description": "If you are looking for a traditional Italian pizza, the Neapolitan is the best option.",
+      "image": "pizza4.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Neapolitan Pizza",
+      "description": "If you are looking for a traditional Italian pizza, the Neapolitan is the best option.",
+      "image": "pizza5.jpg"
+    }
+  ]
+}

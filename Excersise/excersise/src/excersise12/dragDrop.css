@@ -1,0 +1,76 @@
+h1,
+p {
+  font-family: Lato;
+}
+.list-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  justify-content: space-around;
+}
+.card {
+  text-align: center;
+  padding-top: 1em;
+}
+.card.list-card-todo {
+  background-color: aliceblue;
+}
+.card.list-card-done {
+  background-color: rgb(202, 248, 202);
+}
+.task {
+  border: 1px solid red;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task:hover {
+  cursor: grab;
+  box-shadow: 5px 10px #d6d2d2;
+}
+
+.task:active {
+  cursor: grabbing;
+  box-shadow: 5px 10px #d6d2d2;
+}
+
+.add-task {
+  padding: 20px 20px 9px;
+  display: flex;
+  gap: 20px;
+  text-align: center;
+}
+.add-button {
+  position: relative;
+  top: 0;
+  cursor: pointer;
+  background: #aea3ef;
+  border-radius: 3px;
+  box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+  border: none;
+  color: white;
+  line-height: 36px;
+  text-align: center;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.delete-button {
+  position: relative;
+  top: 0;
+  cursor: pointer;
+  background: #e2442c;
+  border-radius: 3px;
+  box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+  border: none;
+  color: white;
+  line-height: 36px;
+  text-align: center;
+  user-select: none;
+  transition: all 0.2s ease;
+  margin-left: 10px;
+}

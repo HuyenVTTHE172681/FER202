@@ -1,0 +1,44 @@
+{
+  "courses": [
+    {
+      "id": "6a00",
+      "courseName": "REACT JS",
+      "courseImage": "https://via.placeholder.com/102",
+      "percentLearning": 6,
+      "isCompleted": false,
+      "courseType": "Web/Design"
+    },
+    {
+      "id": "dcf2",
+      "courseName": "VUEJS COURSE",
+      "courseImage": "https://via.placeholder.com/100",
+      "percentLearning": 100,
+      "isCompleted": true,
+      "courseType": "Web/Design"
+    },
+    {
+      "id": "a0b6",
+      "courseName": "MATH ",
+      "courseImage": "https://via.placeholder.com/99",
+      "percentLearning": 100,
+      "isCompleted": true,
+      "courseType": "Data Science"
+    },
+    {
+      "id": "1c41",
+      "courseName": "HTML CSS COURSE",
+      "courseImage": "https://via.placeholder.com/200",
+      "percentLearning": 90,
+      "isCompleted": false,
+      "courseType": "Web/Design"
+    },
+    {
+      "id": "8fff",
+      "courseName": "TYPESCRIPT COURSES",
+      "courseImage": "https://via.placeholder.com/250",
+      "percentLearning": 55,
+      "isCompleted": false,
+      "courseType": "Web/Design"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+/* Excersise 4 */
+
+.card {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+}
+
+.card-text {
+  text-align: center;
+}
+
+.container_ex5 {
+  text-align: center;
+}
+
+.header_ex5 {
+  background-color: #FFA500;
+  border: none;
+}
+
+.menu_ex5 {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  color: white;
+}
+
+.main_ex5 {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.title_menu {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.footer_ex5 {
+  background-color: #e6a836f9;
+  border: none;
+  color: white;
+}
+
+
