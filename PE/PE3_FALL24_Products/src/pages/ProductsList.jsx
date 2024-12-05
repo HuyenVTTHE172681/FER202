@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 function ProductsList() {
     const [products, setProducts] = useState([]);
@@ -9,6 +9,7 @@ function ProductsList() {
     const [brand, setBrand] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedBrand, setSelectedBrand] = useState("");
+    const navigate = useNavigate();
 
     // Lấy dữ liệu về các khóa học
     useEffect(() => {
@@ -18,22 +19,43 @@ function ProductsList() {
                 const categoryAPI = await axios.get("http://localhost:9999/category");
                 const brandAPI = await axios.get("http://localhost:9999/brand");
 
-                setProducts(productAPI.data);
+                // setProducts(productAPI.data);
                 setCategory(categoryAPI.data);
                 setBrand(brandAPI.data);
+
+                let filteredProducts = productAPI.data;
+
+                console.log("PRoducts:", productAPI.data);
+                console.log("Brand:" , brandAPI.data);
+                console.log("Categories: ", categoryAPI.data);
+                
+                if(selectedBrand !== "" && selectedCategory !== "") {
+                    filteredProducts = filteredProducts.filter((product) => product.category == selectedCategory && product.brand == selectedBrand);
+                    console.log(filteredProducts);
+                }
+
+                if(selectedCategory !== "") {
+                    filteredProducts = filteredProducts.filter((product) => product.category == selectedCategory);
+                    console.log(filteredProducts);
+                }
+
+                if(selectedBrand !== "") {
+                    filteredProducts = filteredProducts.filter((product) => product.brand == selectedBrand);
+                }
+
+                setProducts(filteredProducts);
+
             } catch (error) {
                 console.log(error.message);
             }
         };
         fetchData();
-    }, []);
+    }, [selectedBrand, selectedCategory, navigate]);
 
-    const filteredProducts = products.filter((product) => {
-        const isCategoryMatch = selectedCategory === "" || product.category === selectedCategory;
-        const isBrandMatch = selectedBrand === "" || product.brand === selectedBrand;
+    console.log("Selected Category", selectedCategory);
+    console.log("Selected Brand", selectedBrand);
+   console.log("products", products);
 
-        return isCategoryMatch && isBrandMatch;
-    });
 
     return (
         <>
@@ -52,7 +74,6 @@ function ProductsList() {
                                 label={c?.name}
                                 key={c?.id}
                                 value={c?.id}
-                                checked={selectedCategory.includes(c?.id)}
                                 onChange={(e) => setSelectedCategory(e.target.value)}
                             />
                         ))}
@@ -65,18 +86,16 @@ function ProductsList() {
                                 label={b?.name}
                                 key={b?.id}
                                 value={b?.id}
-                                checked={selectedBrand.includes(b?.id)}
                                 onChange={(e) => setSelectedBrand(e.target.value)}
                             />
                         ))}
                     </div>
                 </Col>
 
-                {/* Hiển thị danh sách khóa học */}
                 <Col md={10}>
-                    {filteredProducts.length > 0 ? (
+                    {products.length > 0 ? (
                         <Row>
-                            {filteredProducts.map((p) => (
+                            {products.map((p) => (
                                 <Col
                                     sm={4}
                                     md={3}
