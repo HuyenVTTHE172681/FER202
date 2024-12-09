@@ -1,13 +1,14 @@
 import { Container, Row, Col, Form, Table } from "react-bootstrap";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function StudentList() {
     const [student, setStudent] = useState([]);
     const [subject, setSubject] = useState([]);
     const [studentDetail, setStudentDetail] = useState([]);
     const [search, setSearch] = useState("");
+    const [selectedSubject, setSelectedSubject] = useState(null);
     // const navigate = useNavigate();
     // const location = useLocation();
 
@@ -17,6 +18,7 @@ function StudentList() {
                 const studentAPI = await axios.get("http://localhost:9999/students");
                 const studentDetailAPI = await axios.get("http://localhost:9999/student_details");
                 const subjectAPI = await axios.get("http://localhost:9999/subjects");
+                const students_subjectApi = await axios.get("http://localhost:9999/students_subjetcs");
 
                 setStudentDetail(studentDetailAPI.data);
                 setSubject(subjectAPI.data);
@@ -30,14 +32,26 @@ function StudentList() {
                     );
                 }
 
+                // Filter by subject
+                if (selectedSubject !== null) {
+                    filteredStudents = filteredStudents.map(student => {
+                        const subjects = students_subjectApi.data
+                            .filter(ss => ss.studentId.toString() === student.studentId)
+                            .map(ss => subjectAPI.data.find(sub => sub.subjectId.toString() === ss.subjectId.toString()));
+
+                        return { ...student, subjects };
+                    })
+                }
+
                 setStudent(filteredStudents);
+                console.log("Student filter: ", filteredStudents);
             } catch (error) {
                 console.error("Error fetching data:", error.message);
             }
         };
 
         fetchData();
-    }, [search]);
+    }, [search, selectedSubject]);
 
     return (
         <Container>
@@ -60,8 +74,8 @@ function StudentList() {
                     <h5>Subjects</h5>
                     <ul>
                         {subject.map((c) => (
-                            <li key={c.id}>
-                                <Link>{c.name}</Link>
+                            <li key={c.id} value={c.subjectId}>
+                                <Link to={`/student?subjects=${c.subjectId}`} onChange={(e) => setSelectedSubject(e.target.value)}>{c.name}</Link>
                             </li>
                         ))}
                     </ul>
