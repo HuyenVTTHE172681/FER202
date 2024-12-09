@@ -8,18 +8,23 @@ function StudentGrades() {
     const [subject, setSubject] = useState([]);
     const [search, setSearch] = useState("");
     const navigate = useNavigate();
-    // const location = useLocation();
 
     const [evaluations, setEvaluations] = useState([]);
+    const [newGrade, setNewGrade] = useState("");
+    const [newExplanation, setNewExplanation] = useState("");
+
+    const id = window.location.pathname.split("/")[2];
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const studentAPI = await axios.get("http://localhost:9999/students");
-                const evaluationAPI = await axios.get("http://localhost:9999/evaluations");
+                const evaluationAPI = await axios.get("http://localhost:9999/evaluations?studentId=" + id);
                 const subjectAPI = await axios.get("http://localhost:9999/subjects");
 
                 setEvaluations(evaluationAPI.data);
+                console.log("Evaluations before: ", evaluationAPI.data);
                 setSubject(subjectAPI.data);
 
                 let filteredStudents = studentAPI.data;
@@ -45,15 +50,52 @@ function StudentGrades() {
     // console.log("Student Id: ", student.map((s) => s.studentId))
     // console.log("Evaluations: ", evaluations.map((e) => e.studentId))
 
-    const evaluationStudent = evaluations.filter(evaluation => evaluation.studentId === student.find((s) => s.studentId).studentId).map((e) => e);
-    // console.log(evaluationStudent)
-
-    const studentEvaluations = student.filter(student => student.studentId === evaluations.find((s) => s.studentId).studentId).map((s) => s.name);
-    // console.log(studentEvaluations)
-
     const backtoHome = () => {
         navigate("/");
     }
+
+    const handleAddGrade = async () => {
+        if (!newExplanation || !newGrade) {
+            alert("Please fill in all fields.");
+        } else {
+
+            try {
+                const studentID = window.location.pathname.split("/")[2];
+                console.log("Student ID: ", studentID);
+
+
+                const newEvaluation = {
+                    studentID,
+                    grade: parseFloat(newGrade),
+                    additionalExplanation: newExplanation
+                };
+
+                // Gửi request để thêm điểm vào database
+                await axios.post("http://localhost:9999/evaluations", newEvaluation);
+                console.log("Grade new: ", newEvaluation);
+                alert("Grade added successfully!");
+
+                // Reset form
+                setNewGrade("");
+                setNewExplanation("");
+
+                // Reload lại dữ liệu từ API
+                const evaluationAPI = await axios.get("http://localhost:9999/evaluations?studentId=" + id);
+                setEvaluations(evaluationAPI.data);
+                console.log("Evaluations after: ", evaluationAPI.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+    }
+
+    // const evaluationStudent = evaluations.filter(evaluation => evaluation.studentId == id).map((e) => e);
+    // console.log("evaluationStudent", evaluationStudent)
+
+    const studentEvaluations = student.filter(student => student.studentId == id).map((s) => s.name);
+    console.log("studentEvaluations", studentEvaluations)
+
 
     return (
         <Container>
@@ -99,8 +141,10 @@ function StudentGrades() {
                         <Col md={5}>
                             <Form.Control
                                 required
-                                type="text"
+                                type="number"
                                 placeholder="Enter grade"
+                                value={newGrade}
+                                onChange={(e) => setNewGrade(e.target.value)}
                             />
                         </Col>
                         <Col md={5}>
@@ -108,10 +152,12 @@ function StudentGrades() {
                                 required
                                 type="text"
                                 placeholder="Enter additional explanation"
+                                value={newExplanation}
+                                onChange={(e) => setNewExplanation(e.target.value)}
                             />
                         </Col>
                         <Col md={2}>
-                            <Button>Add new</Button>
+                            <Button onClick={handleAddGrade}>Add new</Button>
                         </Col>
                     </Row>
                     <Row>
@@ -124,7 +170,7 @@ function StudentGrades() {
                             </thead>
                             <tbody>
                                 {evaluations.length > 0 ? (
-                                    evaluationStudent.map((e) => {
+                                    evaluations.map((e) => {
                                         return (
                                             <tr key={e.id}>
                                                 <td>{e?.grade || "N/A"}</td>
