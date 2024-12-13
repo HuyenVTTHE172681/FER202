@@ -80,9 +80,7 @@ function StudentGrades() {
                 setNewExplanation("");
 
                 // Reload lại dữ liệu từ API
-                const evaluationAPI = await axios.get("http://localhost:9999/evaluations?studentId=" + id);
-                setEvaluations(evaluationAPI.data);
-                console.log("Evaluations after: ", evaluationAPI.data);
+                setEvaluations([...evaluations, newEvaluation]);
             } catch (error) {
                 console.log(error);
             }

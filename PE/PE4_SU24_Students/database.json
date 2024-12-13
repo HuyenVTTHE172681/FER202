@@ -99,6 +99,12 @@
       "studentID": "HE1710001",
       "grade": 10,
       "additionalExplanation": "WEB201"
+    },
+    {
+      "id": "2747",
+      "studentID": "HE1710001",
+      "grade": 6.7,
+      "additionalExplanation": "SSL"
     }
   ],
   "subjects": [

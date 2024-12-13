@@ -7,6 +7,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<StudentList />}></Route>
+                <Route path="/student" element={<StudentList />}></Route>
                 {/* // navigate(`/student?subject=${id}`); */}
                 <Route path="/student/:id" element={<StudentGrades />}></Route>
             </Routes>

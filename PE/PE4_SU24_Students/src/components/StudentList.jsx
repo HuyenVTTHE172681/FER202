@@ -1,14 +1,15 @@
 import { Container, Row, Col, Form, Table } from "react-bootstrap";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 function StudentList() {
     const [student, setStudent] = useState([]);
     const [subject, setSubject] = useState([]);
     const [studentDetail, setStudentDetail] = useState([]);
     const [search, setSearch] = useState("");
-    const [selectedSubject, setSelectedSubject] = useState(null);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const selectedSubjectId = searchParams.get("subject"); // Lấy giá trị subject từ URL
     // const navigate = useNavigate();
     // const location = useLocation();
 
@@ -33,7 +34,7 @@ function StudentList() {
                 }
 
                 // Filter by subject
-                if (selectedSubject !== null) {
+                if (selectedSubjectId) {
                     filteredStudents = filteredStudents.map(student => {
                         const subjects = students_subjectApi.data
                             .filter(ss => ss.studentId.toString() === student.studentId)
@@ -41,6 +42,16 @@ function StudentList() {
 
                         return { ...student, subjects };
                     })
+                }
+
+                if (selectedSubjectId) {
+                    filteredStudents = filteredStudents.filter((student) =>
+                        students_subjectApi.data.some(
+                            (relation) =>
+                                relation.studentId === student.studentId &&
+                                relation.subjectId.toString() === selectedSubjectId
+                        )
+                    );
                 }
 
                 setStudent(filteredStudents);
@@ -51,7 +62,7 @@ function StudentList() {
         };
 
         fetchData();
-    }, [search, selectedSubject]);
+    }, [search, selectedSubjectId]);
 
     return (
         <Container>
@@ -73,9 +84,14 @@ function StudentList() {
                 <Col md={3}>
                     <h5>Subjects</h5>
                     <ul>
-                        {subject.map((c) => (
-                            <li key={c.id} value={c.subjectId}>
-                                <Link to={`/student?subjects=${c.subjectId}`} onChange={(e) => setSelectedSubject(e.target.value)}>{c.name}</Link>
+                        {subject.map((subject) => (
+                            <li key={subject.subjectId}>
+                                <Link
+                                    to={`/student?subject=${subject.subjectId}`}
+                                    onClick={() => setSearchParams({ subject: subject.subjectId })}
+                                >
+                                    {subject.name}
+                                </Link>
                             </li>
                         ))}
                     </ul>
