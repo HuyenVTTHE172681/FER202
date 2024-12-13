@@ -93,6 +93,12 @@
       "studentId": "HE1710002",
       "grade": 9,
       "additionalExplanation": "PRO192 course"
+    },
+    {
+      "id": "d813",
+      "studentID": "HE1710001",
+      "grade": 10,
+      "additionalExplanation": "WEB201"
     }
   ],
   "subjects": [

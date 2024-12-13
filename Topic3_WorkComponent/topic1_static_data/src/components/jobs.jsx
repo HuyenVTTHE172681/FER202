@@ -20,59 +20,52 @@ function Jobs() {
 
     if (!existUser) {
       navigate('/login');
-    } 
+    }
 
-      fetch('http://localhost:9999/jobs?uId=' + existUser.id)
-        .then((response) => response.json())
-        .then((result) => {
-          // Kiểm tra dữ liệu của search
-          // if(search.length === 0) {
-          //   setJobs(result);
-          // } else {
-          //   let searchJobs = result?.filter((job) => job.title.toLowerCase().includes(search.toLowerCase()));
-          //   setJobs(searchJobs);
-          // }
+    fetch('http://localhost:9999/jobs?uId=' + existUser.id)
+      .then((response) => response.json())
+      .then((result) => {
 
-                let filteredJobs = result;
+        let filteredJobs = result;
 
-      // Apply search filter
-      if (search.length > 0) {
-        filteredJobs = filteredJobs.filter((job) =>
-          job.title.toLowerCase().includes(search.toLowerCase())
-        );
-      }
+        // Apply search filter
+        if (search.length > 0) {
+          filteredJobs = filteredJobs.filter((job) =>
+            job.title.toLowerCase().includes(search.toLowerCase())
+          );
+        }
 
-      // Apply category filter
-      if (selectedCategory !== 0) {
-        filteredJobs = filteredJobs.filter((job) => job.cId === parseInt(selectedCategory));
-        console.log(filteredJobs);
-      }
+        // Apply category filter
+        if (selectedCategory !== 0) {
+          filteredJobs = filteredJobs.filter((job) => job.cId === parseInt(selectedCategory));
+          console.log(filteredJobs);
+        }
 
-      if(selectedCategory == 0) {
-        filteredJobs = result;
-      }
+        if (selectedCategory == 0) {
+          filteredJobs = result;
+        }
 
-      if(selectedStatus !== false) {
-        filteredJobs = filteredJobs.filter((job) => job.status === selectedStatus);
-      }
-      
-      setJobs(filteredJobs);
+        if (selectedStatus !== false) {
+          filteredJobs = filteredJobs.filter((job) => job.status === selectedStatus);
+        }
+
+        setJobs(filteredJobs);
 
 
 
-        })
-        .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
 
-      fetch('http://localhost:9999/users')
+    fetch('http://localhost:9999/users')
       .then((response) => response.json())
       .then((result) => setUser(result))
       .catch((error) => console.log(error));
 
-      fetch('http://localhost:9999/categories')
+    fetch('http://localhost:9999/categories')
       .then((response) => response.json())
       .then((result) => setCategory(result))
       .catch((error) => console.log(error));
-    
+
   }, [search, selectedCategory, selectedStatus, navigate]);
 
 
@@ -81,23 +74,23 @@ function Jobs() {
   console.log("Category:", category);
   console.log("Selected Category:", selectedCategory);
 
-  function handleDelete(id){
+  function handleDelete(id) {
     // Gửi request tới API http://localhost:9999/jobs/:id -> Deleted job
 
-    if(window.confirm("Do you want to delete job = " + id)) {
-      fetch(`http://localhost:9999/jobs/${id}`, {method: 'DELETE'})
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        window.location.reload();
-      })
-      .catch((error) => console.log(error));
+    if (window.confirm("Do you want to delete job = " + id)) {
+      fetch(`http://localhost:9999/jobs/${id}`, { method: 'DELETE' })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result);
+          window.location.reload();
+        })
+        .catch((error) => console.log(error));
     }
   }
 
   const deleteJob = (id) => {
     const confirmDelete = window.confirm("Do you want to delete job = " + id);
-    if(!confirmDelete) return;
+    if (!confirmDelete) return;
 
     axios.delete(`http://localhost:9999/jobs/${id}`).then(() => {
       setJobs(jobs.filter((job) => job?.id !== id));
@@ -192,7 +185,7 @@ function Jobs() {
                 </tr>
               </thead>
               <tbody>
-                 {jobs.length > 0 ? (
+                {jobs.length > 0 ? (
                   jobs.map((job) => (
                     <tr key={job?.id}>
                       <td>{job?.id}</td>
