@@ -7,8 +7,8 @@ function ListRecipes() {
     const [user, setUser] = useState([]);
     const [search, setSearch] = useState(""); // Trạng thái search
     const [sortRating, setSortRating] = useState(""); // Trạng thái sắp xếp
-    const [selectedRec, setSelected] = useState(); // Trạng thái view recipes
-    const [newIngre, setNewIngre] = useState({ ingredients: "" });
+    // const [selectedRec, setSelected] = useState(); // Trạng thái view recipes
+    // const [newIngre, setNewIngre] = useState({ ingredients: "" });
     const [yourRecipes, setYourRecipes] = useState([]);
 
     // Lấy dữ liệu và filter
@@ -178,7 +178,7 @@ function ListRecipes() {
                                         ))}</td>
                                         <td>{items?.rating}</td>
                                         <td>
-                                            <Button onClick={() => setSelected(items)}>View Rec</Button>
+                                            {/* <Button onClick={() => setSelected(items)}>View Rec</Button> */}
                                             <br />
                                             <Button className="mt-2" onClick={() => handleAddYourRecipe(items)}>Add Your Recipe</Button>
                                         </td>
@@ -195,7 +195,7 @@ function ListRecipes() {
                     </Table>
                 </Col>
                 <Col md={3}>
-                    <Row>
+                    {/* <Row>
                         <h5>Ingredients List</h5>
                         {selectedRec ? (
                             <>
@@ -220,7 +220,7 @@ function ListRecipes() {
                         ) : (
                             <>No items</>
                         )}
-                    </Row>
+                    </Row> */}
                     <Row className="mt-3">
                         <h5>Your Recipes:</h5>
                         {yourRecipes.length > 0 ? (
